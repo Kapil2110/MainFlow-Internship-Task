@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import "./App.css";
 
 function App() {
+  //State to Control visiviity of the code
+  const [showPage, setShowPage] = useState(false);
+
+  //useEffect to add a 5sec delay before showing my page
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowPage(true); // Show the Page after 5sec delay
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {showPage ? (
+        <div>
+          <h1>WelcomeTo My Page!</h1>
+          <p>This is my Task 1 Basic React App</p>
+        </div>
+      ) : (
+        <div>
+          <h1>Loading...!</h1>
+          <p>Please wait For Task 1 </p>
+        </div>
+      )}
     </div>
   );
 }
